@@ -1,0 +1,820 @@
+__EFMigrationsHistory
+---
+MigrationId PK
+ProductVersion
+
+AspNetRoleClaims
+---
+Id PK
+RoleId FK - AspNetRoles.Id
+ClaimType
+ClaimValue
+
+AspNetRoles
+---
+Id PK
+Name
+NormalizedName
+ConcurrencyStamp
+
+AspNetUserClaims
+---
+Id PK
+UserId FK - AspNetUsers.Id
+ClaimType
+ClaimValue
+
+AspNetUsers
+---
+Id PK
+UserName
+NormalizedUserName
+Email
+NormalizedEmail
+EmailConfirmed
+PasswordHash
+SecurityStamp
+ConcurrencyStamp
+PhoneNumber
+PhoneNumberConfirmed
+TwoFactorEnabled
+LockoutEnd
+LockoutEnabled
+AccessFailedCount
+Discriminator
+FirstName
+LastName
+SignatureFile
+Hide
+StartupPage
+ProfilePictureFile
+
+AspNetUserLogins
+---
+LoginProvider PK
+ProviderKey PK
+ProviderDisplayName
+UserId FK - AspNetUsers.Id
+
+AspNetUserTokens
+---
+UserId PK FK - AspNetUsers.Id
+LoginProvider PK
+Name PK
+Value
+
+CodeDetail
+---
+ID PK
+CodeFileID FK - CodeFile.ID
+Code
+Description
+ParentCodeDetailID FK - CodeDetail.ID
+
+CodeFile
+---
+ID PK
+Name
+Description
+IsHierarchal
+Separator
+
+Link
+---
+ID PK
+Name
+URL
+
+CodeEntry
+---
+ID PK
+CodeDetailID FK - CodeDetail.ID
+CodeFileID FK - CodeFile.ID
+Text
+
+CodeFileLink
+---
+CodeFileID PK FK - CodeFile.ID
+LinkedCodeFileID PK FK - CodeFile.ID
+Order
+
+CodeResults
+---
+ID PK
+ResourceFileID FK - ResourceFile.ID
+CodeDetailID FK - CodeDetail.ID
+ResourceResultID FK - ResourceResult.ID
+ResourceCodeID FK - ResourceCode.ID
+
+ResourceCode
+---
+ID PK
+ResourceFileID FK - ResourceFile.ID
+ResourceID
+Description
+D1
+
+ResourceFile
+---
+ID PK
+Name
+Description
+RateFileID FK - RateFile.ID
+D1
+Format1030FileID FK - CodeFile.ID
+
+RateFile
+---
+ID PK
+Name
+Description
+
+ResourceResult
+---
+ID PK
+ResourceFileID FK - ResourceFile.ID
+Name
+Unit
+IsCurrency
+Format1030CodeId FK - CodeDetail.ID
+
+Comment
+---
+ID PK
+Description
+UserID FK - AspNetUsers.Id
+DateCreated
+
+ContingencyAssignment
+---
+ID PK
+TechnicalFactor
+TechnicalMultiplier
+CostFactor
+CostMultiplier
+ScheduleFactor
+ScheduleMultiplier
+SnapshotID FK - Snapshot.ID
+WorkPackage
+ContingencyPct
+ContingencyPctOverride
+TechnicalBasis
+CostBasis
+ScheduleBasis
+OverallBasis
+WBS
+CostFactorDescription
+CostMultiplierDescription
+ScheduleFactorDescription
+ScheduleMultiplierDescription
+TechnicalFactorDescription
+TechnicalMultiplierDescription
+ResourceAssignmentID FK - ResourceAssignment.ID
+
+ResourceAssignment
+---
+SnapshotID FK - Snapshot.ID
+Type
+WBS
+WorkPackage
+CostEstimateID FK - CostEstimate.ID
+ActivityCode
+Activity
+StartDate
+FinishDate
+Description
+Units
+UnitCost
+Cost
+CostBasis
+BOE
+TypeOfTrip
+Contingency
+ResourceCodeID FK - ResourceCode.ID
+ContingencyPercent
+ActivityId
+CostClass
+ID PK
+ActivityIds
+
+CostEstimate
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+WBS
+WorkPackageNumber
+WorkPackageTitle
+LastUpdatedBy
+DateLastUpdated
+Pending
+Quantity
+ReadyForApproval
+EVT
+PercentComplete
+CAM FK - AspNetUsers.Id
+
+Snapshot
+---
+ID PK
+Application
+Name
+Description
+Date
+OriginalName
+ContingencyTable FK - ContingencySource.ID
+ResourceFile FK - ResourceFile.ID
+WBSCodeFile FK - CodeFile.ID
+WPCodeFile FK - CodeFile.ID
+EstimatorFile FK - CodeFile.ID
+Locked
+EstimateGrid1Alias
+EstimateGrid1Units
+EstimateGrid2Alias
+EstimateGrid2Units
+EstimateGrid3Alias
+EstimateGrid3Units
+RegistrySetID FK - RegistrySet.ID
+ActivityCodeFile FK - CodeFile.ID
+BasisCodeFile FK - CodeFile.ID
+UnitTimePhase
+CalendarOrFiscalYear
+FiscalYearStartMonth
+NonLaborUnitTimePhase
+TravelUnitTimePhase
+ProjectNeedsRecalculating
+ReportWbsSummaryCostType
+ReportWbsSummaryCostTypeNotebookField
+ReportWbsSummaryEstimateWithDescription
+StatusDate
+ReportingPeriod
+EVActualColor
+EVBudgetColor
+EVEarnedColor
+LockSchedule
+IsDefaultProject
+FundingSource
+EndDate
+NumHoursWorkDay
+StartDate
+WorkDays
+
+ContingencySource
+---
+ID PK
+Name
+Description
+
+RegistrySet
+---
+ID PK
+Name
+
+ContingencyLine
+---
+ID PK
+ContingencySourceID FK - ContingencySource.ID
+Value
+Description
+Source
+Type
+
+CostClass
+---
+ID PK
+Name
+Description
+ClassType
+Level
+RateFileID FK - RateFile.ID
+SnapshotID FK - Snapshot.ID
+
+ExternalLink
+---
+ID PK
+Name
+URL
+
+CostEstimateTimePhase
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+CostEstimateID FK - CostEstimate.ID
+ResourceDate
+ItemCost
+ResourceCode
+ResourceResult
+ResourceType
+IsCurrency
+FiscalYear
+ResourceResultOrder
+CostClass
+ResourceAssignmentID FK - ResourceAssignment.ID
+
+CostSet
+---
+ID PK
+Name
+Description
+SnapshotID FK - Snapshot.ID
+
+DashboardView
+---
+ID PK
+Name
+Xml
+ReadOnly
+Height
+Order
+Width
+
+HistoryTracking
+---
+ID PK
+Created
+Action
+TableName
+RecordId
+JSON
+SnapshotId
+UserID FK - AspNetUsers.Id
+
+Holiday
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+Date
+IsYearly
+
+ImportExportField
+---
+ID PK
+ImportExportGroupingID FK - ImportExportGrouping.ID
+TableName
+FieldName
+SpreadsheetFieldName
+SpreadsheetDataType
+IsRequiredField
+SpreadsheetFieldDescription
+ShowPossibleValues
+SortOrder
+AliasTableFieldName
+
+ImportExportGrouping
+---
+ID PK
+Name
+FileName
+Instructions
+TablesToTruncate
+OtherTablesDelete
+
+MenuItem
+---
+Id PK
+ParentId FK - MenuItem.Id
+DisplayName
+InternalName
+Order
+Icon
+FilterPopoutName
+
+Messages
+---
+ID PK
+Name
+Type
+SnapshotID
+Subject
+Body
+SendDate
+DueDate
+DateCreated
+ReminderFrequency
+Dash360UserId FK - AspNetUsers.Id
+
+MonteCarloSimulation
+---
+ID PK
+Created
+Title
+SnapshotID
+SimulationResults
+
+NotebookCategory
+---
+ID PK
+Name
+FieldType
+CodeFileID FK - CodeFile.ID
+
+NotebookCategoryOption
+---
+ID PK
+NotebookCategoryID FK - NotebookCategory.ID
+Name
+Order
+
+NotebookCategorySnapshot
+---
+NotebookCategoryID PK FK - NotebookCategory.ID
+SnapshotID PK FK - Snapshot.ID
+Order
+
+NotebookEntry
+---
+ID PK
+NotebookCategoryID FK - NotebookCategory.ID
+Text
+WorkPackage
+SnapshotID FK - Snapshot.ID
+WBS
+
+RateDetail
+---
+ID PK
+RateFileID FK - RateFile.ID
+RateSet
+RateDate
+Rate
+
+RatesetBoe
+---
+ID PK
+RateFileID FK - RateFile.ID
+RateSetName
+Comment
+FileUpload
+
+Registry
+---
+ID PK
+Name
+Value
+RegistrySetID FK - RegistrySet.ID
+IsOnOff
+
+ResourceAssignmentIdCounter
+---
+ID PK
+
+ResourceAssignmentNotebookCategorySnapshots
+---
+NotebookCategoryID PK FK - NotebookCategory.ID
+SnapshotID PK FK - Snapshot.ID
+Order
+
+ResourceAssignmentNotebookEntries
+---
+ID PK
+NotebookCategoryID FK - NotebookCategory.ID
+SnapshotID FK - Snapshot.ID
+WBS
+WorkPackage
+ResourceAssignmentID FK - ResourceAssignment.ID
+Text
+
+ResourceAssignmentTimePhasedUnit
+---
+ResourceAssignmentID PK FK - ResourceAssignment.ID
+ResourceDate PK
+Units
+PercentOfTotal
+
+ResourceCalculation
+---
+ID PK
+ResourceResultID FK - ResourceResult.ID
+ResourceCodeID FK - ResourceCode.ID
+RateSet
+Order
+ResultType
+
+ResourceCodeEntry
+---
+ID PK
+ResourceCodeID FK - ResourceCode.ID
+CodeFileID FK - CodeFile.ID
+Text
+
+ResourceFileCodeFile
+---
+ResourceFileID PK FK - ResourceFile.ID
+CodeFileID PK FK - CodeFile.ID
+Order
+
+RiskCategory
+---
+ID PK
+Name
+
+RiskIdPrefix
+---
+ID PK
+Title
+SnapshotID FK - Snapshot.ID
+Prefix
+StartingNumber
+IncrementValue
+
+RiskItem
+---
+ID PK
+Updated
+Created
+Title
+Description
+SnapshotID PK
+RiskIdPrefixID FK - RiskIdPrefix.ID
+Type
+WBS
+WBSDescription
+ImpactedWorkPackages
+RiskOwnerId FK - AspNetUsers.Id
+AssigneeId FK - AspNetUsers.Id
+UpdateById FK - AspNetUsers.Id
+Response
+MitigationPlan
+MitigationStatus
+Watchers
+CostImpact
+Probability
+Consequence
+RiskCategoryID FK - RiskCategory.ID
+ScheduleImpactDays
+Status
+TriggerDate
+RiskTypeID FK - RiskType.ID
+
+RiskType
+---
+ID PK
+Name
+
+RiskRegisterNotebookCategorySnapshot
+---
+NotebookCategoryID PK FK - NotebookCategory.ID
+SnapshotID PK FK - Snapshot.ID
+Order
+
+RiskRegisterNotebookEntry
+---
+ID PK
+NotebookCategoryID FK - NotebookCategory.ID
+Text
+RiskItemID FK - RiskItem.ID
+SnapshotID
+
+RiskRegisterScratchPad
+---
+ID PK
+Title
+RiskRegisterID
+RiskCategoryID FK - RiskCategory.ID
+RiskTypeID FK - RiskType.ID
+WBS
+WorkPackage
+CostImpact
+Probability
+TotalCostExposure
+SnapshotID FK - Snapshot.ID
+
+RiskThreshold
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+Type
+MinimumThreshold
+SelectedValue
+Text
+
+ScheduleStatusUpdates
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+StartDate
+FinishDate
+Complete
+Comment
+SuccessorsAddedActivities
+SuccessorsRemovedActivities
+ActivityId
+ActivityDescription
+ActivityDuration
+DeleteActivity
+UserID FK - AspNetUsers.Id
+ReportingPeriod
+LastUpdatedDate
+PredecessorsAddedActivities
+PredecessorsRemovedActivities
+DoneDate
+Approved
+
+Section
+---
+ID PK
+Name
+
+SectionView
+---
+ID PK
+SectionID FK - Section.ID
+UserID
+Name
+DefaultView
+SavedState
+
+SignatureSteps
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+StepName
+UserID FK - AspNetUsers.Id
+IsCAMAssignedToWP
+Order
+ArchivedDate
+
+SignatureStepsCompleted
+---
+SignatureStepID PK FK - SignatureSteps.ID
+CostEstimateID PK FK - CostEstimate.ID
+UserID PK FK - AspNetUsers.Id
+SignoffDate PK
+TotalCostWP
+Comments
+
+SnapshotReportColors
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+LabelName
+Color
+
+TaskCustomFields
+---
+Id PK
+FieldName
+
+TaskItemCustomFields
+---
+Id PK
+Value
+TaskItemId FK - Tasks.ID
+TaskCustomFieldId FK - TaskCustomFields.Id
+
+Tasks
+---
+ID PK
+ActivityID
+SnapshotID FK - Snapshot.ID
+Type
+WBS
+WBSName
+OBS
+ActivityName
+OriginalDuration
+PhysicalPercentComplete
+Start
+Finish
+BaselineStartDate
+BaselineFinishDate
+PreviousMonthStart
+PreviousMonthFinish
+TotalFloat
+MilestoneLevel
+WorkPackage
+Location
+WorkPackageWeight
+Owner
+priority
+resources
+compactResources
+Hide
+WorkPackageName
+MaxDuration
+MinDuration
+UncertaintyClassID FK - UncertaintyClass.ID
+MostLikelyDuration
+ConstraintDate
+
+UncertaintyClass
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+Name
+Description
+TypeOfEstimate
+MinFactor
+MostLikelyFactor
+MaxFactor
+ResourceType
+
+TaskLinks
+---
+ID PK
+ActivityID
+SnapshotID
+Type
+Driving
+Lag
+SourceId FK - Tasks.ID
+TargetId FK - Tasks.ID
+Critical
+
+TaskResourceSchedule
+---
+Id PK
+SnapshotID
+ActivityID
+ResourceIDName
+ResourceID
+ResourceName
+StartDate
+Hour
+
+UserSettings
+---
+ID PK
+UserID
+ShowCurrencySymbol
+ShowComma
+NumDecimalPlaces
+
+VarianceNarrativeEntries
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+VarianceNarrativeFieldID FK - VarianceNarrativeFields.ID
+WorkPackageNumber
+Type
+ReportingPeriod
+Value
+UserID FK - AspNetUsers.Id
+LastUpdatedDate
+PeriodType
+WBS
+DoneDate
+
+VarianceNarrativeFields
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+Name
+IsRequired
+Order
+
+VarianceNarrativeYellowFlags
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+ReportingPeriod
+Type
+PeriodType
+WorkPackageNumber
+UserID FK - AspNetUsers.Id
+LastUpdatedDate
+WBS
+
+VarianceThresholds
+---
+ID PK
+SnapshotID FK - Snapshot.ID
+HighValue
+HighPercent
+LowValue
+LowPercent
+Color
+ConditionalOperator
+NarrativeRequired
+Order
+PercentOperator
+ValueOperator
+VarianceType
+PercentFieldToCompare
+VarianceSubType
+WBS
+WorkPackage
+
+WBSNotebookCategorySnapshot
+---
+NotebookCategoryID PK FK - NotebookCategory.ID
+SnapshotID PK FK - Snapshot.ID
+Order
+
+WBSNotebookEntry
+---
+ID PK
+NotebookCategoryID FK - NotebookCategory.ID
+Text
+WBS
+SnapshotID FK - Snapshot.ID
+
+WorkPackagePermissions
+---
+WBS
+WorkPackageNumber
+UserID FK - AspNetUsers.Id
+UserType
+SnapshotID FK - Snapshot.ID
+ID PK
+Module
+
